@@ -37,6 +37,9 @@ global:
   evalys_commit: fae0e04
   batsim_experiments_commit: 5ce3017342
 
+bootstrap:
+  - "@base"
+
 setup:
   #
   # General configuration
@@ -123,9 +126,8 @@ setup:
       - exec_in: |
           cd $$simctn_dir
           git clone https://github.com/oar-team/evalys.git
+          cd evalys
           git checkout $${evalys_commit}
-      - exec_in: |
-          cd $$simctn_dir/evalys
           pip3 install .
 
   # Evironement capture and sharing for runtime extraction
