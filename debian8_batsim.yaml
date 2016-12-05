@@ -112,16 +112,17 @@ setup:
       #-     make -j$(nproc)
       #-     make install
 
+  # need pandas in testing
+  - configure_apt_testing
+
   - evalys:
     - install dependencies:
       - exec_in: |
-          apt-get -y --force-yes install \
+          apt-get -y --force-yes install -t testing \
             python3-pip \
             python3-pyqt4 \
             python3-matplotlib \
-            python3-pandas \
-            ipython3-notebook \
-            python3-mpld3
+            python3-pandas
     - install_evalys:
       - exec_in: |
           cd $$simctn_dir
@@ -129,10 +130,6 @@ setup:
           cd evalys
           git checkout $${evalys_commit}
           pip3 install .
-
-  # Evironement capture and sharing for runtime extraction
-  #
-  - reprozip
 
   # Experiment inputs and launch scripts
   #
